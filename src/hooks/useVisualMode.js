@@ -3,7 +3,6 @@ import { useState } from "react";
 export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
-  console.log("before useVisualMode", "mode", mode, "history", history)
 
   function transition(newMode, replace = false) {
     if (replace) {
@@ -23,8 +22,6 @@ export default function useVisualMode(initial) {
       setHistory(backHistory)
     }
   };
-
-  console.log("after useVisualMode", "mode", mode, "history", history)
 
   return { mode, transition, back };
 
