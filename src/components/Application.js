@@ -7,6 +7,8 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../h
 const axios = require("axios");
 
 export default function Application(props) {
+  //Database reset
+  // axios.get('/api/debug/reset');
 
   const [state, setState] = useState({
     day: "Monday",
@@ -14,13 +16,58 @@ export default function Application(props) {
     appointments: {},
     interviewers: {}
   });
+
   const setDay = day => setState({ ...state, day });
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const dailyInterviewers = getInterviewersForDay(state, state.day);
 
+  const bookInterview = function(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+
+    return axios.put(`/api/appointments/${id}`, {interview})
+    .then((res) => {
+      const appointments = {
+        ...state.appointments,
+        [id]: appointment
+      };
+  
+      setState({
+        ...state, appointments
+      });
+    })
+    .catch(err => {
+      return err;
+    });
+    
+  };
+
+  const cancelInterview = function(id) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
+    return axios.delete(`/api/appointments/${id}`)
+    .then((res) => {
+        const appointments = {
+          ...state.appointments,
+          [id]: appointment
+        };
+    
+        setState({
+          ...state, appointments
+        });
+    })
+    .catch(err => {
+      return err;
+    });
+    
+  };
+
   const schedule = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
-    console.log("inside schedule", dailyInterviewers)
     return (
       <Appointment
         key={appointment.id}
@@ -28,6 +75,8 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={dailyInterviewers}
+        bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });
@@ -38,9 +87,10 @@ export default function Application(props) {
       axios.get('/api/appointments'),
       axios.get('/api/interviewers')
     ]).then((all) => {
-      console.log('/api/interviewers', all);
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
-    });
+    }).catch((err) => {
+      console.log(err);
+    });;
 
   }, []);
 
