@@ -37,9 +37,6 @@ export default function Application(props) {
       setState({
         ...state, appointments
       });
-    })
-    .catch(err => {
-      return err;
     });
     
   };
@@ -59,9 +56,6 @@ export default function Application(props) {
         setState({
           ...state, appointments
         });
-    })
-    .catch(err => {
-      return err;
     });
     
   };
