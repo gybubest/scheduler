@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
+import PropTypes from 'prop-types';
 
 export default function Form(props) {
   const {interviewers, onSave, onCancel} = props;
@@ -44,4 +45,8 @@ export default function Form(props) {
     </section>
   </main>
 
+};
+
+InterviewerList.propTypes = {
+  interviewers: PropTypes.array.isRequired
 };
