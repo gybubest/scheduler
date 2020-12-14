@@ -30,7 +30,7 @@ export default function Appointment(props) {
   const saveAppointment = function(name, interviewer) {
     transition(SAVING);
     
-    if (name && interviewer){
+    if (interviewer){
       const interview = {
         student: name,
         interviewer
