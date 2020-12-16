@@ -9,6 +9,18 @@ export default function Form(props) {
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
 
+  const validate = () => {
+    if (name === "") {
+      setError("Student name cannot be blank");
+      return;
+    } else if (!interviewer) {
+      setError("Interviewer not chosen");
+      return;
+    }
+    setError("");
+    onSave(name, interviewer);
+  };
+  
   const reset = () => {
     setName("");
     setInterviewer(null);
@@ -24,14 +36,6 @@ export default function Form(props) {
     reset();
   };
 
-  function validate() {
-    if (name === "") {
-      setError("Student name cannot be blank");
-      return;
-    }
-    setError("");
-    onSave(name, interviewer);
-  }
 
   return <main className="appointment__card appointment__card--create">
     <section className="appointment__card-left">
