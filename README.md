@@ -1,5 +1,15 @@
 # Interview Scheduler
 
+This is a single-page app, which helps book, edit and cancel appointments.
+
+## Final Product
+
+- Book appointments
+!["mobile-page"](https://github.com/gybubest/tweeter/blob/master/docs/mobile-page.png?raw=true)
+
+- Modify appointments
+!["desktop-page"](https://github.com/gybubest/tweeter/blob/master/docs/desktop-page.png?raw=true)
+
 ## Setup
 
 Install dependencies with `npm install`.
