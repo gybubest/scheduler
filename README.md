@@ -5,10 +5,10 @@ This is a single-page app, which helps book, edit and cancel appointments.
 ## Final Product
 
 - Book appointments
-!["Book appointments"]()
+!["Book appointments"](https://github.com/gybubest/scheduler/blob/master/docs/Book%20appointments.png?raw=true)
 
 - Modify appointments
-!["Modify appointments]()
+!["Modify appointments](https://github.com/gybubest/scheduler/blob/master/docs/Modify%20appointments.png?raw=true)
 
 ## Setup
 
