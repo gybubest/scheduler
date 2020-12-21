@@ -20,20 +20,13 @@ export default function Form(props) {
     setError("");
     onSave(name, interviewer);
   };
-  
-  const reset = () => {
-    setName("");
-    setInterviewer(null);
-  };
 
   const cancel = () => {
-    reset();
     onCancel();
   };
 
   const save = () => {
     validate();
-    reset();
   };
 
 
