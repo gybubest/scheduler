@@ -1,7 +1,7 @@
 import React from "react";
 
 import "components/Appointment/styles.scss";
-
+import useVisualMode from "../../hooks/useVisualMode";
 import Header from "components/Appointment/Header";
 import Empty from "components/Appointment/Empty";
 import Show from "components/Appointment/Show";
@@ -9,7 +9,6 @@ import Status from "components/Appointment/Status";
 import Form from "components/Appointment/Form";
 import Confirm from "components/Appointment/Confirm";
 import Error from "components/Appointment/Error";
-import useVisualMode from "../../hooks/useVisualMode";
 
 export default function Appointment(props) {
   const EMPTY        = "EMPTY";
@@ -27,7 +26,7 @@ export default function Appointment(props) {
     interview ? SHOW : EMPTY
   );
 
-  const saveAppointment = function(name, interviewer) {
+  const saveAppointment = (name, interviewer) => {
     transition(SAVING);
     
     const interview = {
@@ -41,7 +40,7 @@ export default function Appointment(props) {
 
   };
 
-  const deleteAppointment = function() {
+  const deleteAppointment = () => {
     transition(DELETING, true);
     cancelInterview(id)
     .then(() => transition(EMPTY))
