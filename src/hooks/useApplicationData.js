@@ -73,23 +73,23 @@ export default function useApplicationData() {
 
 };
 
+//Change remaining spot only when adding or deleting appointments
 const changeRemainingSpot = (book, state, id) => {
-  let change = 0;
-  book? change-- : change++ ;
-  
+  const change = book? -1 : 1;
   let days = [...state.days];
 
-  for (let day of days) {
-    if (day.appointments.includes(id)) {
-      const dayId = days.indexOf(day);
-      const newDay = {
-        ...day,
-        spots: day.spots + change
-      };
-
-      days.splice(dayId, 1, newDay);
+  if (state.appointments[id]["interview"] === null || change === 1) {
+    for (let day of days) {
+      if (day.appointments.includes(id)) {
+        const dayId = days.indexOf(day);
+        const newDay = {
+          ...day,
+          spots: day.spots + change
+        };
+        days.splice(dayId, 1, newDay);
+      }
     }
-  }
-
+  } 
   return days;
+
 }
