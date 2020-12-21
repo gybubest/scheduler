@@ -29,7 +29,7 @@ export default function useApplicationData() {
       };
       
       // Update the days
-      const days = changeRemainingSpot(true, state, id);
+      const days = changeRemainingSpot(-1, state, id);
 
       setState({
         ...state, days, appointments
@@ -52,7 +52,7 @@ export default function useApplicationData() {
           [id]: appointment
         };
         // Update the days
-        const days = changeRemainingSpot(false, state, id);
+        const days = changeRemainingSpot(1, state, id);
 
         setState({
           ...state, days, appointments
@@ -80,8 +80,7 @@ export default function useApplicationData() {
 };
 
 // Change remaining spots only when adding or deleting appointments
-const changeRemainingSpot = (book, state, id) => {
-  const change = book? -1 : 1;
+const changeRemainingSpot = (change, state, id) => {
   let days = [...state.days];
   // Update remaining spots in days only when creating new interviews or deleting existing interviews
   if (state.appointments[id]["interview"] === null || change === 1) {
